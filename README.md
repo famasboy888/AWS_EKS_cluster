@@ -172,3 +172,8 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 <p align="left">
   <img width="80%" height="80%" src="https://github.com/famasboy888/AWS_EKS_cluster/assets/23441168/f9a9cb1f-8d42-48de-9f90-45a63de1fa54">
 </p>
+
+You will also notice that our ingress now has an `ADDRESS`
+<p align="left">
+  <img width="80%" height="80%" src="https://github.com/famasboy888/AWS_EKS_cluster/assets/23441168/8d2b7ca6-bfd2-41eb-90d5-b2a77bc6fb9d">
+</p>
