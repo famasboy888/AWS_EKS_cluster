@@ -1,4 +1,4 @@
-#  Tier III - AWS Elastic Kubernetes Cluster (EKS) + Next.js App
+#  Tier III - AWS Elastic Kubernetes Cluster (EKS) + Next.js App + Mongo DB
 
 Before we begin refer to [Pre-requisites](https://github.com/famasboy888/AWS_EKS_cluster/blob/main/Pre-requisite.md)
 
