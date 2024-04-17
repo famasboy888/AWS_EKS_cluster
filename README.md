@@ -123,8 +123,7 @@ To verify:
 oidc_id=$(aws eks describe-cluster --name $cluster_name --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
 aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 ```
-### 3.1 We install AWS Load Balancer Controller in our EKS cluster
-We create a IAM Policy and Role first
+### 3.2 We create a IAM Policy and Role first
 
 This file is IAM policy is widely used:
 ```bash
@@ -149,4 +148,24 @@ eksctl create iamserviceaccount \
  --approve
 ```
 
+### 3.3 We deploy AWS Load Balancer Controller using HEML
+```bash
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update eks
+```
+
+```bash
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \            
+ -n kube-system \
+ --set clusterName=<your-cluster-name> \
+ --set serviceAccount.create=false \
+ --set serviceAccount.name=aws-load-balancer-controller \
+ --set region=<region> \
+ --set vpcId=<your-vpc-id>
+```
+
+Check if all pods are running:
+```bash
+kubectl get deployment -n kube-system aws-load-balancer-controller
+```
     
