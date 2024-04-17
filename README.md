@@ -167,4 +167,8 @@ Check if all pods are running:
 ```bash
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
-    
+## 4) We will see Application Load Balancer magically appear (well, it is not really a magic...)
+
+<p align="left">
+  <img width="80%" height="80%" src="https://github.com/famasboy888/AWS_EKS_cluster/assets/23441168/f9a9cb1f-8d42-48de-9f90-45a63de1fa54">
+</p>
