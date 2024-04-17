@@ -123,5 +123,30 @@ To verify:
 oidc_id=$(aws eks describe-cluster --name $cluster_name --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
 aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 ```
+### 3.1 We install AWS Load Balancer Controller in our EKS cluster
+We create a IAM Policy and Role first
+
+This file is IAM policy is widely used:
+```bash
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+```
+
+Create IAM Policy:
+```bash
+aws iam create-policy \
+ --policy-name AWSLoadBalancerControllerIAMPolicy \
+ --policy-document file://iam_policy.json
+```
+
+Create IAM Role:
+```bash
+eksctl create iamserviceaccount \
+ --cluster=<your-cluster-name> \
+ --namespace=kube-system \
+ --name=aws-load-balancer-controller \
+ --role-name AmazonEKSLoadBalancerControllerRole \
+ --attach-policy-arn=arn:aws:iam::<your-aws-account-id>:policy/AWSLoadBalancerControllerIAMPolicy \
+ --approve
+```
 
     
