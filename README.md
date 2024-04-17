@@ -110,8 +110,7 @@ For now, the ingress will not function yet.
 
 We need to deploy `AWS Load Balancer Controller`.
 
-## 3) We can start deploying our Application
-
+## 3) We will now add AWS Load Balancer Controller to our EKS cluster
 ### 3.1 Create and configure OIDC provider.
 We need this to enable an application to access/modify AWS resources.
 
