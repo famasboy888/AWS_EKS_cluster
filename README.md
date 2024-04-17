@@ -2,7 +2,7 @@
 
 Before we begin refer to [Pre-requisites](https://github.com/famasboy888/AWS_EKS_cluster/blob/main/Pre-requisite.md)
 
-## Create cluster
+## 1) Create cluster
 ```bash
 eksctl create cluster \
  --name test-cluster \
@@ -32,3 +32,7 @@ Output:
 2024-04-16 22:45:09 [ℹ]  node "ip-192-168-71-90.ap-northeast-1.compute.internal" is ready
 2024-04-16 22:45:09 [✔]  EKS cluster "test-cluster" in "ap-northeast-1" region is ready
 ```
+## 2) We can start deploying our Application
+
+I created a Docker Image for my previous [Next.js Project](https://github.com/famasboy888/promptopia_nextjs)
+
