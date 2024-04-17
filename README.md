@@ -1,4 +1,4 @@
-# Deploy App in EKS Cluster
+# Deploy Next.js App in AWS Elastic Kubernetes Cluster (EKS)
 
 Before we begin refer to [Pre-requisites](https://github.com/famasboy888/AWS_EKS_cluster/blob/main/Pre-requisite.md)
 
@@ -36,3 +36,84 @@ Output:
 
 I created a Docker Image for my previous [Next.js Project](https://github.com/famasboy888/promptopia_nextjs)
 
+I did not use HELM for this since it was a small test deployment.
+
+**Deployment.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-webapp-frontend
+spec:
+  selector:
+    matchLabels:
+      app: react-webapp
+      tier: frontend
+      track: stable
+  replicas: 1
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      labels:
+        app: react-webapp
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+      - name: react-webapp
+        image: famasboy888/next-js-app:1.0.2.RELEASE
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+```
+
+**Service.yaml**
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-webapp-frontend
+spec:
+  selector:
+    app: react-webapp
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+```
+
+**Ingress.yaml**
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-web-app
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: react-webapp-frontend
+              port:
+                number: 80
+```
+
+For now, the ingress will not function yet.
+
+We need to deploy `AWS Load Balancer Controller`.
+
+## 3) We can start deploying our Application
+
+### 3.1 Create and configure OIDC provider.
+
+    We need this to enable an application to access/modify AWS resources.
+
+    
