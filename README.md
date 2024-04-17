@@ -113,7 +113,15 @@ We need to deploy `AWS Load Balancer Controller`.
 ## 3) We can start deploying our Application
 
 ### 3.1 Create and configure OIDC provider.
+We need this to enable an application to access/modify AWS resources.
 
-    We need this to enable an application to access/modify AWS resources.
+```bash
+eksctl utils associate-iam-oidc-provider --cluster <cluster_name> --approve
+```
+To verify:
+```bash
+oidc_id=$(aws eks describe-cluster --name $cluster_name --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
+aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
+```
 
     
