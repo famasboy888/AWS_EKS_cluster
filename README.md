@@ -2,6 +2,10 @@
 
 Before we begin refer to [Pre-requisites](https://github.com/famasboy888/AWS_EKS_cluster/blob/main/Pre-requisite.md)
 
+<p align="center">
+  <img width="100%" height="100%" src="https://github.com/famasboy888/AWS_EKS_cluster/assets/23441168/0d8d622c-c4a3-4fd9-90a4-862b70fe7a53">
+</p>
+
 ## 1) Create cluster
 ```bash
 eksctl create cluster \
